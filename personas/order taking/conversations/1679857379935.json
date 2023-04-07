@@ -1,0 +1,34 @@
+[
+  {
+    "role": "user",
+    "content": "je voudrais commander une pizza ou 2"
+  },
+  {
+    "role": "assistant",
+    "content": "Bien sûr ! Pourriez-vous me préciser le modèle des pizzas que vous aimeriez commander parmi la Margaritta à 11 euros, la Reine à 12 euros, la Savoyarde à 13 euros, la Regina à 9 euros et l'Orientale à 12 euros ? Ainsi que le type de pâte souhaité pour chaque pizza (classique, fine, épaisse) ?"
+  },
+  {
+    "role": "user",
+    "content": "je vais commander 2 regina. Une avec une pate classique et une avec une pate épaisse"
+  },
+  {
+    "role": "assistant",
+    "content": "Très bien, je récapitule votre commande : 2 pizzas Regina, l'une avec une pâte classique et l'autre avec une pâte épaisse. Le prix total pour ces 2 pizzas sera de 18 euros.\n\nSouhaitez-vous apporter des modifications à la garniture de vos pizzas (par exemple, sans oignons) ?\n\nSi vous confirmez la commande, je vous donnerai le temps de préparation estimé."
+  },
+  {
+    "role": "user",
+    "content": "non c'est bon je confirme"
+  },
+  {
+    "role": "assistant",
+    "content": "Parfait, je vous remercie pour votre commande. Puisque vous avez commandé 2 pizzas, le temps de préparation estimé sera de 10 minutes. Votre commande sera donc prête dans 10 minutes. Bon appétit et à bientôt dans notre pizzeria !"
+  },
+  {
+    "role": "user",
+    "content": "bye"
+  },
+  {
+    "role": "assistant",
+    "content": "Au revoir et merci de votre visite ! N'hésitez pas à revenir nous voir pour une autre délicieuse pizza. À bientôt !"
+  }
+]

@@ -1,0 +1,10 @@
+[
+    {
+        "role": "user",
+        "content": "bye"
+    },
+    {
+        "role": "assistant",
+        "content": "Au revoir ! N'hésite pas à revenir discuter si tu en as envie."
+    }
+]

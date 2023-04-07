@@ -1,0 +1,18 @@
+[
+    {
+        "role": "user",
+        "content": "coucou"
+    },
+    {
+        "role": "assistant",
+        "content": "Bonjour ! Comment ça va ? Tu as passé une bonne journée ?"
+    },
+    {
+        "role": "user",
+        "content": "bye"
+    },
+    {
+        "role": "assistant",
+        "content": "Au revoir, passe une bonne journée ! N'hésite pas à revenir si tu veux discuter."
+    }
+]

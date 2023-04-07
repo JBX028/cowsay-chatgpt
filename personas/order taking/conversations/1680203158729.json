@@ -1,0 +1,58 @@
+[
+  {
+    "role": "user",
+    "content": "bonjour"
+  },
+  {
+    "role": "assistant",
+    "content": "Bonjour ! Bienvenue à notre pizzeria. Combien de pizzas aimeriez-vous commander et quels modèles ? Nous avons la Margaritta à 11 euros, la Reine à 12 euros, la Savoyarde à 13 euros, la Regina à 9 euros et l'Orientale à 12 euros. Et n'oubliez pas de choisir le type de pâte : classique, fine ou épaisse."
+  },
+  {
+    "role": "user",
+    "content": "je ne sais pas bien, je vais prendre une regina et j'hésite pour en prendre une deuxième"
+  },
+  {
+    "role": "assistant",
+    "content": "C'est une bonne idée de prendre une Regina. Pour la deuxième, nous avons d'autres choix populaires comme la Margaritta, la Reine, la Savoyarde ou l'Orientale. Prenez votre temps pour décider et je suis là pour vous aider si besoin. N'oubliez pas de me dire également le type de pâte : classique, fine ou épaisse."
+  },
+  {
+    "role": "user",
+    "content": "je vis prendre une orientale. Pour les 2 je vais choisir une pate épaisse"
+  },
+  {
+    "role": "assistant",
+    "content": "Très bien, donc vous commandez une Regina et une Orientale, toutes deux avec une pâte épaisse. La Regina coûte 9 euros et l'Orientale coûte 12 euros. Le total de votre commande est donc de 21 euros. Est-ce que cela vous convient ? Si oui, je pourrais vous indiquer le temps de préparation et vous donner un numéro de commande."
+  },
+  {
+    "role": "user",
+    "content": "oui vas y fait partir j'ai faim"
+  },
+  {
+    "role": "assistant",
+    "content": "Parfait ! Votre commande est : \n1 Regina avec pâte épaisse (9 euros) \n1 Orientale avec pâte épaisse (12 euros) \n\nLe total est de 21 euros. \n\nPuisque vous commandez deux pizzas, le temps de préparation sera de 10 minutes. Votre numéro de commande est le 153. Vous pouvez vous installer confortablement en attendant que votre commande soit prête. Merci et bon appétit !"
+  },
+  {
+    "role": "user",
+    "content": ""
+  },
+  {
+    "role": "assistant",
+    "content": "Si vous avez besoin de quoi que ce soit d'autre, n'hésitez pas à me le faire savoir. Profitez bien de votre repas et merci de nous avoir choisi pour déguster nos délicieuses pizzas. Bon appétit et à bientôt !"
+  },
+  {
+    "role": "user",
+    "content": ""
+  },
+  {
+    "role": "assistant",
+    "content": "Merci et passez une bonne journée ! Si vous avez besoin de nous pour une future commande ou pour toute question, n'hésitez pas à revenir vers nous. À bientôt !"
+  },
+  {
+    "role": "user",
+    "content": "bye"
+  },
+  {
+    "role": "assistant",
+    "content": "Au revoir ! Passez une excellente journée et à bientôt !"
+  }
+]

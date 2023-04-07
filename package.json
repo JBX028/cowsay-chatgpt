@@ -1,0 +1,19 @@
+{
+  "name": "cowsay-chatgpt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node . && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cowsay": "^1.5.0",
+    "dotenv": "^16.0.3",
+    "openai": "^3.2.1",
+    "prompt-sync": "^4.2.0",
+    "wrap-text": "^1.0.9"
+  }
+}

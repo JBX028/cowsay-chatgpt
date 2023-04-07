@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "bye"
+  },
+  {
+    "role": "assistant",
+    "content": "Bonjour ! Avant que vous ne partiez, je tenais simplement à vous rappeler que nous proposons une délicieuse sélection de pizzas. Si vous changez d'avis, n'hésitez pas à revenir et à passer commande. Passez une excellente journée !"
+  }
+]

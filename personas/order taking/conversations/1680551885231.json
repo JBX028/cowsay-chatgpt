@@ -1,0 +1,66 @@
+[
+  {
+    "role": "user",
+    "content": "Bonjour"
+  },
+  {
+    "role": "assistant",
+    "content": "Bonjour et bienvenue à notre pizzeria ! Combien de pizzas aimeriez-vous commander aujourd'hui ?"
+  },
+  {
+    "role": "user",
+    "content": "2 et demie"
+  },
+  {
+    "role": "assistant",
+    "content": "Je suis désolé, mais nous vendons uniquement des pizzas entières. Souhaitez-vous commander 2 ou 3 pizzas ?"
+  },
+  {
+    "role": "user",
+    "content": "4"
+  },
+  {
+    "role": "assistant",
+    "content": "Parfait, vous souhaitez commander 4 pizzas. Quels modèles de pizza aimeriez-vous ? Nous avons la margaritta à 11 euros, la reine à 12 euros, la savoyarde à 13 euros, la regina à 9 euros, et l'orientale à 12 euros."
+  },
+  {
+    "role": "user",
+    "content": "4 reines"
+  },
+  {
+    "role": "assistant",
+    "content": "Très bien, vous avez choisi 4 pizzas reines. Quel type de pâte souhaitez-vous pour vos pizzas : classique, fine ou épaisse ?"
+  },
+  {
+    "role": "user",
+    "content": "1 classique, 1 fine, 1 classique et 3 épaisses"
+  },
+  {
+    "role": "assistant",
+    "content": "Je remarque que vous avez sélectionné 6 pâtes pour 4 pizzas. Pourriez-vous préciser la combinaison souhaitée, s'il vous plaît ?"
+  },
+  {
+    "role": "user",
+    "content": "4 epaisses"
+  },
+  {
+    "role": "assistant",
+    "content": "Merci pour ces précisions. Donc vous avez commandé 4 pizzas reines avec une pâte épaisse. Le prix total est de 4 x 12 euros = 48 euros. Confirmez-vous cette commande ?"
+  },
+  {
+    "role": "user",
+    "content": "oui"
+  },
+  {
+    "role": "assistant",
+    "content": "Super ! Votre commande est confirmée. Le temps de préparation sera de 5 minutes par pizza, soit 20 minutes au total. Le numéro de votre commande est le 153. Votre commande sera prête dans 20 minutes. Merci de votre confiance et à bientôt !"
+  },
+  {
+    "role": "user",
+    "content": "bye"
+  },
+  {
+    "role": "assistant",
+    "content": "Au revoir et bonne dégustation ! N'hésitez pas à revenir pour vos prochaines envies de pizza. À bientôt !"
+  }
+]

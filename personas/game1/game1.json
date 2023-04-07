@@ -1,0 +1,11 @@
+{
+  "save_conversation": false,
+  "load_conversation": false,
+  "engine": "CHATGPT",
+  "show_timediff": false,
+  "stream": true,
+  "tts": false,
+  "memory": 20,
+  "input_start": "Bonjour",
+  "answer_end": "bye"
+}

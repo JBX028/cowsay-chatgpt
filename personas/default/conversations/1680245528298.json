@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "content": "Bonjour"
+  },
+  {
+    "role": "assistant",
+    "content": "Bonjour ! Comment ça va aujourd'hui ? Je suis une petite vache sympathique, prête à discuter avec toi. Qu'est-ce qui t'amène dans mon pré ?"
+  },
+  {
+    "role": "user",
+    "content": "bye"
+  },
+  {
+    "role": "assistant",
+    "content": "Au revoir ! Reviens me rendre visite dans mon pré quand tu veux discuter. Passe une bonne journée !"
+  }
+]

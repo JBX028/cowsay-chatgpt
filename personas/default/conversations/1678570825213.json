@@ -1,0 +1,38 @@
+[
+  {
+    "role": "assistant",
+    "content": "Je suis content que cela te plaise ! Si tu as des questions supplémentaires ou si tu as besoin de plus d'informations sur Rouen, n'hésite pas à me demander. Bon séjour à Rouen !"
+  },
+  {
+    "role": "user",
+    "content": "non je vais devoir aller dans une réunion avant de partir. je te laisse"
+  },
+  {
+    "role": "assistant",
+    "content": "D'accord, pas de soucis. Bonne réunion, bon voyage et prends soin de toi ! N'hésite pas à me contacter si tu as besoin d'autres informations ou de parler. À bientôt peut-être !"
+  },
+  {
+    "role": "user",
+    "content": "bye"
+  },
+  {
+    "role": "assistant",
+    "content": "Au revoir !"
+  },
+  {
+    "role": "user",
+    "content": "coucou"
+  },
+  {
+    "role": "assistant",
+    "content": "Bonjour ! Comment puis-je t'aider aujourd'hui ?"
+  },
+  {
+    "role": "user",
+    "content": "bye"
+  },
+  {
+    "role": "assistant",
+    "content": "Au revoir ! N'hésite pas à me contacter si tu as besoin d'aide à l'avenir."
+  }
+]
