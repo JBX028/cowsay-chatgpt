@@ -77,51 +77,53 @@ const getInstructPromptFromMessages = () => {
 
 }
 
-const getAnswerFromInstructGPT = async () => {
+const getAnswerFromInstructGPT = async (model_version, max_tokens) => {
 
     const prompt = getInstructPromptFromMessages()
 
     try {
 
         const response = await openai.createCompletion({
-            model: 'text-davinci-003',
+            model: model_version,
             prompt: prompt,
-            max_tokens: 250,
+            max_tokens: max_tokens,
             stop: ['user:', 'assistant:'],
         })
 
         return response.data.choices[0].text
 
     } catch (error) {
+        consoleStream(error)
         return 'Oups...'
     }
 
 }
 
-const getAnswerFromChatGPT = async () => {
+const getAnswerFromChatGPT = async (model_version, max_tokens) => {
 
     try {
 
         const response = await openai.createChatCompletion({
-            model: 'gpt-4',
-            max_tokens: 250,
+            model: model_version,
+            max_tokens: max_tokens,
             messages: messages
         })
 
         return response.data.choices[0].message.content
 
     } catch (error) {
+        consoleStream(error)
         return 'Oups...'
     }
 
 }
 
-async function* streamChatCompletion() {
+async function* streamChatCompletion(model_version, max_tokens) {
 
     const response = await openai.createChatCompletion(
         {
-            model: 'gpt-4',
-            max_tokens: 250,
+            model: model_version,
+            max_tokens: max_tokens,
             messages,
             stream: true,
         },
@@ -182,6 +184,10 @@ const printcowsay = (text, selectedEyes, selectedTongue) => {
 
 }
 
+const consoleStream = (text) => {
+    fs.writeFileSync('console.txt', text)
+}
+
 (async () => {
 
     const persona = process.env.PERSONA
@@ -202,6 +208,8 @@ const printcowsay = (text, selectedEyes, selectedTongue) => {
     let firstLoop = true
     let userinput
 
+    consoleStream('')
+
     while (userinput != personaJSON.answer_end) {
 
         if (firstLoop) {
@@ -211,6 +219,9 @@ const printcowsay = (text, selectedEyes, selectedTongue) => {
             userinput = prompt(`Message (persona ==> "${persona})": `)
         }
 
+        //consoleStream(userinput)
+        if (userinput == '') continue
+
         pushMessage('user', userinput, personaJSON.memory)
     
         printcowthink('...')
@@ -218,17 +229,17 @@ const printcowsay = (text, selectedEyes, selectedTongue) => {
         let timestamp1 = Date.now()
 
         let output = ''
-        if (personaJSON.engine == 'CHATGPT') {
+        if (personaJSON.model_type == 'CHATGPT') {
             if (personaJSON.stream) {
-                for await (const token of streamChatCompletion()) {
+                for await (const token of streamChatCompletion(personaJSON.model_version, personaJSON.max_tokens)) {
                     output += token
                     printcowsay(output)
                 }
             } else {
-                output = await getAnswerFromChatGPT()
+                output = await getAnswerFromChatGPT(personaJSON.model_version, personaJSON.max_tokens)
             }
-        } else if (personaJSON.engine == 'INSTRUCTGPT') {
-            output = await getAnswerFromInstructGPT()
+        } else if (personaJSON.model_type == 'INSTRUCTGPT') {
+            output = await getAnswerFromInstructGPT(personaJSON.model_version, personaJSON.max_tokens)
         } else {
             output = 'Erreur'
         }
@@ -242,7 +253,7 @@ const printcowsay = (text, selectedEyes, selectedTongue) => {
 
     }
 
-    if ((userinput == personaJSON.answer_end) && personaJSON.save_conversation) {
+    if (personaJSON.save_conversation) {
         const timestamp = Date.now()
         const filePathJSON = path.join(__dirname, `personas/${persona}/conversations/`, `${timestamp}.json`)
         messages.shift()

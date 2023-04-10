@@ -5,7 +5,9 @@ const path = require('path')
 const param = {
     "save_conversation": true,
     "load_conversation": false,
-    "engine": "CHATGPT",
+    "model_type": "CHATGPT",
+    "model_version": "gpt-3.5-turbo",
+    "max_token": 250,
     "show_timediff": false,
     "stream": true,
     "tts": false,
