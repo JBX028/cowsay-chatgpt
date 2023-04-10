@@ -47,8 +47,7 @@ const getMostRecentConversation = (persona) => {
         return JSON.parse(content)
 
     } catch (error) {
-        console.log(error)
-        process.exit(1)
+        consoleStream(error)
         return []
     }
 
@@ -199,6 +198,8 @@ const consoleStream = (text) => {
     const personaJSON = JSON.parse(fs.readFileSync(filePathJSON, 'utf-8'))
 
     pushMessage('system', personaContent, personaJSON.memory)
+
+    if (!fs.existsSync(`personas/${persona}/conversations`)) fs.mkdirSync(`personas/${persona}/conversations`) 
 
     if (personaJSON.load_conversation) {
         const mostRecentConversation = getMostRecentConversation(persona)
