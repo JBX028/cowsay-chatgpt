@@ -5,9 +5,6 @@ const path = require('path')
 const wrapText = require('wrap-text')
 const { Configuration, OpenAIApi } = require('openai')
 
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
-
 require('dotenv').config()
 
 const openai_configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY })
