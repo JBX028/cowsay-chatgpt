@@ -150,8 +150,9 @@ async function* streamChatCompletion(model_version, max_tokens) {
 
 const printcowthink = (text) => {
 
-    text = wrapText(text, 50)
     console.clear()
+
+    text = wrapText(text, 50)
 
     const properties = ['b', 'd', 'g', 'p', 's', 't', 'w', 'y']
     const selectedProperty = properties[Math.floor(Math.random() * properties.length)]
@@ -251,6 +252,7 @@ const consoleStream = (text) => {
         let timeDiff = (timestamp2 - timestamp1) / 1000
 
         printcowsay(output + ((personaJSON.show_timediff == true) ? ' ' + timeDiff : ''), 'OO')
+        consoleStream(output)
 
     }
 
