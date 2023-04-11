@@ -7,7 +7,7 @@
     "show_timediff": false,
     "stream": true,
     "tts": false,
-    "memory": 5,
+    "memory": 10,
     "input_start": "Bonjour",
     "answer_end": "bye"
 }

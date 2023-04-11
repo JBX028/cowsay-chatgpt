@@ -3,3 +3,4 @@ node_modules
 /personas/default/conversations/*
 experiments.js
 console.txt
+.vscode/*

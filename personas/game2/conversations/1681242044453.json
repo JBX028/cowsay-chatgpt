@@ -1,0 +1,78 @@
+[
+  {
+    "role": "assistant",
+    "content": "D'accord, je n'ai pas encore trouvé. Est-ce que ce sport implique de sauter ?"
+  },
+  {
+    "role": "user",
+    "content": "rarement"
+  },
+  {
+    "role": "assistant",
+    "content": "Est-ce que ce sport est pratiqué en plein air ?"
+  },
+  {
+    "role": "user",
+    "content": "ça peu mais c'est pas le plus courant"
+  },
+  {
+    "role": "assistant",
+    "content": "Est-ce que ce sport se pratique sur une surface glissante ou à roulettes ?"
+  },
+  {
+    "role": "user",
+    "content": "non"
+  },
+  {
+    "role": "assistant",
+    "content": "D'accord, j'ai encore besoin de plus d'indices. Est-ce que ce sport demande une certaine souplesse ?"
+  },
+  {
+    "role": "user",
+    "content": "oui parfois"
+  },
+  {
+    "role": "assistant",
+    "content": "Est-ce que ce sport implique des mouvements rapides et des sauts ?"
+  },
+  {
+    "role": "user",
+    "content": "non pas vraiment"
+  },
+  {
+    "role": "assistant",
+    "content": "Est-ce que les participants à ce sport peuvent le pratiquer en équipe ?"
+  },
+  {
+    "role": "user",
+    "content": "à deux"
+  },
+  {
+    "role": "assistant",
+    "content": "Je pense avoir trouvé alors, est-ce que le verbe que vous aviez en tête, c'est \"danser\" ?"
+  },
+  {
+    "role": "user",
+    "content": "oui !!"
+  },
+  {
+    "role": "assistant",
+    "content": "Génial, j'ai trouvé ! J'aime beaucoup ce jeu, c'était amusant de chercher le verbe avec toi. Voudrais-tu jouer une autre partie ou est-ce que tu préfères arrêter ici ?"
+  },
+  {
+    "role": "user",
+    "content": "non"
+  },
+  {
+    "role": "assistant",
+    "content": "D'accord, n'hésite pas à me dire quand tu es prêt à jouer à nouveau."
+  },
+  {
+    "role": "user",
+    "content": "bye"
+  },
+  {
+    "role": "assistant",
+    "content": "Au revoir ! N'hésite pas à me contacter si tu en as besoin à l'avenir."
+  }
+]
