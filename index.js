@@ -228,7 +228,7 @@ const consoleStream = (text) => {
                 userinput = personaJSON.input_start
             }
         } else {
-            userinput = prompt(`Message (persona ==> "${persona})": `)
+            userinput = prompt(`Message ("${persona}"): `)
         }
 
         firstLoop = false
