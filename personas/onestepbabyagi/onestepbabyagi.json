@@ -2,11 +2,11 @@
   "save_conversation": true,
   "load_conversation": false,
   "model_type": "CHATGPT",
-  "model_version": "gpt-3.5-turbo",
-  "max_token": 250,
+  "model_version": "gpt-4",
+  "max_token": 2048,
   "show_timediff": false,
   "stream": true,
   "memory": 20,
-  "input_start": "Bonjour",
+  "input_start": "",
   "answer_end": "bye"
 }

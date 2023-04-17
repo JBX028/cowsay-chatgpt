@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "content": "Bonjour"
+  },
+  {
+    "role": "assistant",
+    "content": "Bonjour, voulez-vous jouer au jeu des 20 questions ?"
+  },
+  {
+    "role": "user",
+    "content": "bye"
+  },
+  {
+    "role": "assistant",
+    "content": "Je suis désolé, je n'ai pas compris votre réponse. Voulez-vous jouer au jeu des 20 questions ?"
+  }
+]

@@ -4,8 +4,10 @@ const fs = require('fs')
 const path = require('path')
 const wrapText = require('wrap-text')
 const { Configuration, OpenAIApi } = require('openai')
-
+const { exec } = require('child_process')
 require('dotenv').config()
+
+const applescriptCmd = `osascript -e 'delay 0.1' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control' -e 'delay 0.2' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control'`
 
 const openai_configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY })
 openai = new OpenAIApi(openai_configuration)
@@ -145,17 +147,25 @@ async function* streamChatCompletion(model_version, max_tokens) {
 
 }
 
-const printcowthink = (text) => {
+const printcowthink = (text, selectedEyes, selectedTongue) => {
 
     console.clear()
 
     text = wrapText(text, 50)
 
-    const properties = ['b', 'd', 'g', 'p', 's', 't', 'w', 'y']
-    const selectedProperty = properties[Math.floor(Math.random() * properties.length)]
+    let options
 
-    const options = { text: text }
-    properties.forEach(property => options[property] = (property === selectedProperty))
+    if (selectedEyes == undefined && selectedTongue == undefined) {
+
+        const properties = ['b', 'd', 'g', 'p', 's', 't', 'w', 'y']
+        const selectedProperty = properties[Math.floor(Math.random() * properties.length)]
+    
+        options = { text: text }
+        properties.forEach(property => options[property] = (property === selectedProperty))
+    
+    } else {
+        options = { text: text, e: selectedEyes, T: selectedTongue }
+    }
 
     console.log(cowsay.think(options) + '\n\n')
 
@@ -205,30 +215,35 @@ const consoleStream = (text) => {
     }
 
     let firstLoop = true
-    let userinput
+    let userinput = ''
 
     consoleStream('')
 
     while (userinput != personaJSON.answer_end) {
 
         if (firstLoop) {
-            userinput = personaJSON.input_start
-            firstLoop = false
+            if (personaJSON.input_start === '') {
+                printcowthink('zZz', '--', '')
+            } else {
+                userinput = personaJSON.input_start
+            }
         } else {
             userinput = prompt(`Message (persona ==> "${persona})": `)
         }
 
+        firstLoop = false
+
         //consoleStream(userinput)
-        if (userinput == '') continue
+        if (userinput === '') continue
 
         pushMessage('user', userinput, personaJSON.memory)
     
         printcowthink('...')
         
-        let timestamp1 = Date.now()
+        const timestamp1 = Date.now()
 
         let output = ''
-        if (personaJSON.model_type == 'CHATGPT') {
+        if (personaJSON.model_type === 'CHATGPT') {
             if (personaJSON.stream) {
                 for await (const token of streamChatCompletion(personaJSON.model_version, personaJSON.max_tokens)) {
                     output += token
@@ -237,7 +252,7 @@ const consoleStream = (text) => {
             } else {
                 output = await getAnswerFromChatGPT(personaJSON.model_version, personaJSON.max_tokens)
             }
-        } else if (personaJSON.model_type == 'INSTRUCTGPT') {
+        } else if (personaJSON.model_type === 'INSTRUCTGPT') {
             output = await getAnswerFromInstructGPT(personaJSON.model_version, personaJSON.max_tokens)
         } else {
             output = 'Erreur'
@@ -245,11 +260,14 @@ const consoleStream = (text) => {
 
         pushMessage('assistant', output, personaJSON.memory)
 
-        let timestamp2 = Date.now()
-        let timeDiff = (timestamp2 - timestamp1) / 1000
+        const timestamp2 = Date.now()
+        const timeDiff = (timestamp2 - timestamp1) / 1000
 
         printcowsay(output + ((personaJSON.show_timediff == true) ? ' ' + timeDiff : ''), 'OO')
         consoleStream(output)
+
+        if (process.env.TTS === 'TRUE') exec(`say "${output}"`)
+        if (process.env.STT === 'TRUE') exec(applescriptCmd)
 
     }
 

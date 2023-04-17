@@ -10,7 +10,6 @@ const param = {
     "max_token": 250,
     "show_timediff": false,
     "stream": true,
-    "tts": false,
     "memory": 20,
     "input_start": "Bonjour",
     "answer_end": "bye"

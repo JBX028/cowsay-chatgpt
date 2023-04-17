@@ -1,0 +1,78 @@
+[
+  {
+    "role": "assistant",
+    "content": "Est-ce un verbe qui décrit une action professionnelle ou liée au travail, comme travailler ou rédiger?"
+  },
+  {
+    "role": "user",
+    "content": "non"
+  },
+  {
+    "role": "assistant",
+    "content": "Est-ce un verbe qui indique un mouvement, comme marcher ou grimper?"
+  },
+  {
+    "role": "user",
+    "content": "non"
+  },
+  {
+    "role": "assistant",
+    "content": "Est-ce un verbe qui décrit une émotion ou un état d'esprit, comme aimer, haïr ou penser?"
+  },
+  {
+    "role": "user",
+    "content": "non"
+  },
+  {
+    "role": "assistant",
+    "content": "Est-ce un verbe qui décrit un comportement ou une action sociale, comme parler ou écouter?"
+  },
+  {
+    "role": "user",
+    "content": "non"
+  },
+  {
+    "role": "assistant",
+    "content": "Est-ce un verbe qui indique une action alimentaire, comme manger ou boire?"
+  },
+  {
+    "role": "user",
+    "content": "oui"
+  },
+  {
+    "role": "assistant",
+    "content": "Est-ce un verbe qui indique une action liée au sucré, comme sucrer ou confire?"
+  },
+  {
+    "role": "user",
+    "content": "tu as déjà trouvé"
+  },
+  {
+    "role": "assistant",
+    "content": "Ah, j'ai donc trouvé le verbe, c'était \"manger\". Est-ce correct ?"
+  },
+  {
+    "role": "user",
+    "content": "oui bravo"
+  },
+  {
+    "role": "assistant",
+    "content": "Super, j'ai réussi ! Est-ce que tu veux jouer une autre fois ou est-ce que tu veux arrêter ici ?"
+  },
+  {
+    "role": "user",
+    "content": "j'arrête "
+  },
+  {
+    "role": "assistant",
+    "content": "D'accord, à une prochaine fois peut-être ! N'hésite pas à me parler si tu as besoin d'autre chose."
+  },
+  {
+    "role": "user",
+    "content": "bye"
+  },
+  {
+    "role": "assistant",
+    "content": "Au revoir, passe une bonne journée !"
+  }
+]
