@@ -7,6 +7,6 @@
   "show_timediff": false,
   "stream": true,
   "memory": 20,
-  "input_start": "",
-  "answer_end": "bye"
+  "input_start": [],
+  "answer_end": ["au revoir", "bye"]
 }

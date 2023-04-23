@@ -1,6 +1,7 @@
 const prompt = require('prompt-sync')()
 const fs = require('fs')
 const path = require('path')
+const { color, log, green } = require('console-log-colors')
 
 const param = {
     "save_conversation": true,
@@ -11,18 +12,19 @@ const param = {
     "show_timediff": false,
     "stream": true,
     "memory": 20,
-    "input_start": "Bonjour",
-    "answer_end": "bye"
+    "input_start": ["Bonjour", "Hello"],
+    "answer_end": ["au revoir", "bye"]
 }
 
-const persona = prompt("Nom à donner à ce nouveau persona : ")
-const content = prompt("Merci de renseigner la description persona ici : ")
+const persona = prompt("Give a name to this new persona : ")
+const content = prompt("Give a description (initial prompt) : ")
 
-const filePath = path.join(__dirname, `personas/${persona}`, `${persona}.txt`)
+const filePath = path.join(__dirname, `personas/${persona}`, `${persona}.md`)
 const jsonPath = path.join(__dirname, `personas/${persona}`, `${persona}.json`)
+
 fs.mkdirSync(`personas/${persona}`)
 fs.writeFileSync(filePath, content)
 fs.writeFileSync(jsonPath, JSON.stringify(param, null, 2))
 fs.mkdirSync(`personas/${persona}/conversations`)
 
-console.log("C'est fait")
+console.log(green('Done!'))

@@ -5,6 +5,8 @@ const path = require('path')
 const wrapText = require('wrap-text')
 const { Configuration, OpenAIApi } = require('openai')
 const { exec } = require('child_process')
+const { color, log, white, green } = require('console-log-colors')
+const say = require('say')
 require('dotenv').config()
 
 const applescriptCmd = `osascript -e 'delay 0.1' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control' -e 'delay 0.2' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control'`
@@ -147,47 +149,63 @@ async function* streamChatCompletion(model_version, max_tokens) {
 
 }
 
-const printcowthink = (text, selectedEyes, selectedTongue) => {
+const printThink = (text, UI, selectedEyes, selectedTongue) => {
 
     console.clear()
 
-    text = wrapText(text, 50)
+    if (UI === 'cowsay') {
 
-    let options
+        text = wrapText(text, 50)
 
-    if (selectedEyes == undefined && selectedTongue == undefined) {
+        let options
 
-        const properties = ['b', 'd', 'g', 'p', 's', 't', 'w', 'y']
-        const selectedProperty = properties[Math.floor(Math.random() * properties.length)]
-    
-        options = { text: text }
-        properties.forEach(property => options[property] = (property === selectedProperty))
-    
-    } else {
-        options = { text: text, e: selectedEyes, T: selectedTongue }
+        if (selectedEyes == undefined && selectedTongue == undefined) {
+
+            const properties = ['b', 'd', 'g', 'p', 's', 't', 'w', 'y']
+            const selectedProperty = properties[Math.floor(Math.random() * properties.length)]
+        
+            options = { text: text }
+            properties.forEach(property => options[property] = (property === selectedProperty))
+        
+        } else {
+            options = { text: text, e: selectedEyes, T: selectedTongue }
+        }
+
+        console.log(cowsay.think(options) + '\n\n')
+
     }
 
-    console.log(cowsay.think(options) + '\n\n')
+    if (UI === 'console') {
+        console.log(white(text + '\n\n'))
+    }    
 
 }
 
-const printcowsay = (text, selectedEyes, selectedTongue) => {
+const printSay = (text, UI, selectedEyes, selectedTongue) => {
 
     console.clear()
 
-    text = wrapText(text, 50)
+    if (UI === 'cowsay') {
 
-    if (selectedEyes == undefined) {
-        const eyes = ['OO', 'OO', 'OO', '--', 'OO', 'OO', 'OO', 'Oo', 'OO', 'OO', '--', 'OO', 'OO', 'OO', 'OO']
-        selectedEyes = eyes[Math.floor(Math.random() * eyes.length)]
+        text = wrapText(text, 50)
+
+        if (selectedEyes == undefined) {
+            const eyes = ['OO', 'OO', 'OO', '--', 'OO', 'OO', 'OO', 'Oo', 'OO', 'OO', '--', 'OO', 'OO', 'OO', 'OO']
+            selectedEyes = eyes[Math.floor(Math.random() * eyes.length)]
+        }
+    
+        if (selectedTongue == undefined) {
+            const tongues = ['', '', '', '', '', '', 'U ', '', ' U', '', '', '', '', '', '', '', '', '', '']
+            selectedTongue = tongues[Math.floor(Math.random() * tongues.length)]
+        }
+    
+        console.log(cowsay.say({ text: text, e: selectedEyes, T: selectedTongue }) + '\n\n')
+
     }
 
-    if (selectedTongue == undefined) {
-        const tongues = ['', '', '', '', '', '', 'U ', '', ' U', '', '', '', '', '', '', '', '', '', '']
-        selectedTongue = tongues[Math.floor(Math.random() * tongues.length)]
+    if (UI === 'console') {
+        console.log(green(text + '\n\n'))
     }
-
-    console.log(cowsay.say({ text: text, e: selectedEyes, T: selectedTongue }) + '\n\n')
 
 }
 
@@ -199,8 +217,8 @@ const consoleStream = (text) => {
 
     const persona = process.env.PERSONA
 
-    const filePathTXT = path.join(__dirname, `personas/${persona}`, `${persona}.txt`)
-    const personaContent = fs.readFileSync(filePathTXT, 'utf-8')
+    const filePathMD = path.join(__dirname, `personas/${persona}`, `${persona}.md`)
+    const personaContent = fs.readFileSync(filePathMD, 'utf-8')
 
     const filePathJSON = path.join(__dirname, `personas/${persona}`, `${persona}.json`)
     const personaJSON = JSON.parse(fs.readFileSync(filePathJSON, 'utf-8'))
@@ -219,13 +237,14 @@ const consoleStream = (text) => {
 
     consoleStream('')
 
-    while (userinput != personaJSON.answer_end) {
+    while (!personaJSON.answer_end.includes(userinput.toLowerCase())) {
 
         if (firstLoop) {
-            if (personaJSON.input_start === '') {
-                printcowthink('zZz', '--', '')
+            const input_start_length = personaJSON.input_start.length
+            if (input_start_length === 0) {
+                printThink('zZz', process.env.UI, '--', '')
             } else {
-                userinput = personaJSON.input_start
+                userinput = personaJSON.input_start[Math.floor(Math.random() * input_start_length)]
             }
         } else {
             userinput = prompt(`Message ("${persona}"): `)
@@ -238,7 +257,7 @@ const consoleStream = (text) => {
 
         pushMessage('user', userinput, personaJSON.memory)
     
-        printcowthink('...')
+        printThink('...', process.env.UI)
         
         const timestamp1 = Date.now()
 
@@ -247,7 +266,7 @@ const consoleStream = (text) => {
             if (personaJSON.stream) {
                 for await (const token of streamChatCompletion(personaJSON.model_version, personaJSON.max_tokens)) {
                     output += token
-                    printcowsay(output)
+                    printSay(output, process.env.UI)
                 }
             } else {
                 output = await getAnswerFromChatGPT(personaJSON.model_version, personaJSON.max_tokens)
@@ -255,7 +274,7 @@ const consoleStream = (text) => {
         } else if (personaJSON.model_type === 'INSTRUCTGPT') {
             output = await getAnswerFromInstructGPT(personaJSON.model_version, personaJSON.max_tokens)
         } else {
-            output = 'Erreur'
+            output = 'Oups...'
         }
 
         pushMessage('assistant', output, personaJSON.memory)
@@ -263,12 +282,18 @@ const consoleStream = (text) => {
         const timestamp2 = Date.now()
         const timeDiff = (timestamp2 - timestamp1) / 1000
 
-        printcowsay(output + ((personaJSON.show_timediff == true) ? ' ' + timeDiff : ''), 'OO')
+        printSay(output + ((personaJSON.show_timediff == true) ? ' ' + timeDiff : ''), process.env.UI, 'OO')
         consoleStream(output)
 
-        if (process.env.TTS === 'TRUE') exec(`say "${output}"`)
-        if (process.env.STT === 'TRUE') exec(applescriptCmd)
-
+        if (process.env.TTS === 'TRUE') {
+            //exec(`say "${output}"`)
+            say.speak(output, 'Amélie', 1, (err) => {
+                if (process.env.STT === 'TRUE') exec(applescriptCmd)
+            })
+        } else {
+            if (process.env.STT === 'TRUE') exec(applescriptCmd)
+        }
+        
     }
 
     if (personaJSON.save_conversation) {
