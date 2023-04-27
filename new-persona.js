@@ -11,6 +11,9 @@ const param = {
     "max_token": 250,
     "show_timediff": false,
     "stream": true,
+    "tts": false,
+    "stt": true,
+    "ui": "cowsay",
     "memory": 20,
     "input_start": ["Bonjour", "Hello"],
     "answer_end": ["au revoir", "bye"]

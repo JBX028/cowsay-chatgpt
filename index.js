@@ -221,7 +221,7 @@ const consoleStream = (text) => {
     const personaContent = fs.readFileSync(filePathMD, 'utf-8')
 
     const filePathJSON = path.join(__dirname, `personas/${persona}`, `${persona}.json`)
-    const personaJSON = JSON.parse(fs.readFileSync(filePathJSON, 'utf-8'))
+    let personaJSON = JSON.parse(fs.readFileSync(filePathJSON, 'utf-8'))
 
     pushMessage('system', personaContent, personaJSON.memory)
 
@@ -242,7 +242,7 @@ const consoleStream = (text) => {
         if (firstLoop) {
             const input_start_length = personaJSON.input_start.length
             if (input_start_length === 0) {
-                printThink('zZz', process.env.UI, '--', '')
+                printThink('zZz', personaJSON.ui, '--', '')
             } else {
                 userinput = personaJSON.input_start[Math.floor(Math.random() * input_start_length)]
             }
@@ -257,7 +257,7 @@ const consoleStream = (text) => {
 
         pushMessage('user', userinput, personaJSON.memory)
     
-        printThink('...', process.env.UI)
+        printThink('...', personaJSON.ui)
         
         const timestamp1 = Date.now()
 
@@ -266,7 +266,7 @@ const consoleStream = (text) => {
             if (personaJSON.stream) {
                 for await (const token of streamChatCompletion(personaJSON.model_version, personaJSON.max_tokens)) {
                     output += token
-                    printSay(output, process.env.UI)
+                    printSay(output, personaJSON.ui)
                 }
             } else {
                 output = await getAnswerFromChatGPT(personaJSON.model_version, personaJSON.max_tokens)
@@ -282,25 +282,27 @@ const consoleStream = (text) => {
         const timestamp2 = Date.now()
         const timeDiff = (timestamp2 - timestamp1) / 1000
 
-        printSay(output + ((personaJSON.show_timediff == true) ? ' ' + timeDiff : ''), process.env.UI, 'OO')
+        printSay(output + ((personaJSON.show_timediff == true) ? ' ' + timeDiff : ''), personaJSON.ui, 'OO')
         consoleStream(output)
 
-        if (process.env.TTS === 'TRUE') {
+        if (personaJSON.tts) {
             //exec(`say "${output}"`)
             say.speak(output, 'Amélie', 1, (err) => {
-                if (process.env.STT === 'TRUE') exec(applescriptCmd)
+                if (personaJSON.stt) exec(applescriptCmd)
             })
         } else {
-            if (process.env.STT === 'TRUE') exec(applescriptCmd)
+            if (personaJSON.stt) exec(applescriptCmd)
         }
+
+        personaJSON = JSON.parse(fs.readFileSync(filePathJSON, 'utf-8')) // live reloading
         
     }
 
     if (personaJSON.save_conversation) {
         const timestamp = Date.now()
-        const filePathJSON = path.join(__dirname, `personas/${persona}/conversations/`, `${timestamp}.json`)
+        const filePathConvJSON = path.join(__dirname, `personas/${persona}/conversations/`, `${timestamp}.json`)
         messages.shift()
-        fs.writeFileSync(filePathJSON, JSON.stringify(messages, null, 2))
+        fs.writeFileSync(filePathConvJSON, JSON.stringify(messages, null, 2))
     }
 
 })()

@@ -7,9 +7,13 @@
   "show_timediff": false,
   "stream": true,
   "tts": false,
-  "stt": true,
+  "stt": false,
   "ui": "cowsay",
   "memory": 20,
-  "input_start": ["Bonjour", "Hello"],
-  "answer_end": ["au revoir", "bye"]
+  "input_start": [
+    "Hello"
+  ],
+  "answer_end": [
+    "bye"
+  ]
 }
