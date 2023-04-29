@@ -1,7 +1,6 @@
 {
   "save_conversation": true,
   "load_conversation": false,
-  "model_type": "CHATGPT",
   "model_version": "gpt-4",
   "max_token": 2048,
   "show_timediff": false,

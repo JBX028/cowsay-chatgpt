@@ -190,7 +190,7 @@ const printSay = (text, UI, selectedEyes, selectedTongue) => {
         text = wrapText(text, 50)
 
         if (selectedEyes == undefined) {
-            const eyes = ['OO', 'OO', 'OO', '--', 'OO', 'OO', 'OO', 'Oo', 'OO', 'OO', '--', 'OO', 'OO', 'OO', 'OO']
+            const eyes = ['OO', 'OO', 'OO', '--', 'OO', 'OO', 'OO', 'Oo', 'OO', 'OO', '--', 'OO', 'OO', 'OO', 'Oo']
             selectedEyes = eyes[Math.floor(Math.random() * eyes.length)]
         }
     
@@ -213,7 +213,7 @@ const consoleStream = (text) => {
     fs.writeFileSync('console.txt', text)
 }
 
-(async () => {
+;(async () => {
 
     const persona = process.env.PERSONA
 
@@ -262,7 +262,7 @@ const consoleStream = (text) => {
         const timestamp1 = Date.now()
 
         let output = ''
-        if (personaJSON.model_type === 'CHATGPT') {
+        if (personaJSON.model_version.startsWith('gpt-')) {
             if (personaJSON.stream) {
                 for await (const token of streamChatCompletion(personaJSON.model_version, personaJSON.max_tokens)) {
                     output += token
@@ -271,7 +271,7 @@ const consoleStream = (text) => {
             } else {
                 output = await getAnswerFromChatGPT(personaJSON.model_version, personaJSON.max_tokens)
             }
-        } else if (personaJSON.model_type === 'INSTRUCTGPT') {
+        } else if (personaJSON.model_version.startsWith('text-davinci-')) {
             output = await getAnswerFromInstructGPT(personaJSON.model_version, personaJSON.max_tokens)
         } else {
             output = 'Oups...'

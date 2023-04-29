@@ -1,5 +1,5 @@
 {
-  "save_conversation": true,
+  "save_conversation": false,
   "load_conversation": false,
   "model_version": "gpt-3.5-turbo",
   "max_token": 250,
@@ -8,11 +8,13 @@
   "tts": false,
   "stt": false,
   "ui": "cowsay",
-  "memory": 20,
+  "memory": 10,
   "input_start": [
-    "Hello"
+    "Bonjour, j'ai un problème à résoudre."
   ],
   "answer_end": [
+    "au revoir",
+    "merci au revoir",
     "bye"
   ]
 }
