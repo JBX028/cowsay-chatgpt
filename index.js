@@ -213,12 +213,28 @@ const consoleStream = (text) => {
     fs.writeFileSync('console.txt', text)
 }
 
+const parseAndEvalJS = (markdown) => {
+
+    const codeBlockRegExp = /```js\n(?<code>[\s\S]+?)\n```(?<result>[\s\S]*?)(?=```|$)/g
+
+    const newOutput = markdown.replace(codeBlockRegExp, (match, code, result) => {
+        const output = eval(code)
+        return result ? `${output}\n${result}` : output
+    })
+
+    return newOutput
+
+}
+
 ;(async () => {
 
     const persona = process.env.PERSONA
 
     const filePathMD = path.join(__dirname, `personas/${persona}`, `${persona}.md`)
-    const personaContent = fs.readFileSync(filePathMD, 'utf-8')
+    let personaContent = fs.readFileSync(filePathMD, 'utf-8')
+    personaContent = parseAndEvalJS(personaContent)
+
+    consoleStream(personaContent)
 
     const filePathJSON = path.join(__dirname, `personas/${persona}`, `${persona}.json`)
     let personaJSON = JSON.parse(fs.readFileSync(filePathJSON, 'utf-8'))
