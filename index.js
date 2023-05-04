@@ -9,6 +9,8 @@ const { color, log, white, green } = require('console-log-colors')
 const say = require('say')
 require('dotenv').config()
 
+//const applescriptCmd = `osascript -e 'delay 0.1' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control' -e 'delay 0.2' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control'`
+
 const applescriptCmd = `osascript -e 'delay 0.1' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control' -e 'delay 0.2' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control'`
 
 const openai_configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY })
@@ -264,12 +266,20 @@ const parseAndEvalJS = (markdown) => {
             }
         } else {
             userinput = prompt(`Message ("${persona}"): `)
+            if (userinput === '') {
+                printSay('???', personaJSON.ui, 'Oo')
+                continue
+            }
         }
-
+        
         firstLoop = false
 
-        //consoleStream(userinput)
         if (userinput === '') continue
+
+        if (userinput === '/zzz') {
+            printThink('zZz', personaJSON.ui, '--', '')
+            continue
+        }
 
         pushMessage('user', userinput, personaJSON.memory)
     

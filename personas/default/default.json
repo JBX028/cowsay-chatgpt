@@ -9,6 +9,6 @@
     "stt": false,
     "ui": "cowsay",
     "memory": 10,
-    "input_start": ["Bonjour", "Hello"],
+    "input_start": [],
     "answer_end": ["au revoir", "bye"]
 }

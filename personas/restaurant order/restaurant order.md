@@ -14,3 +14,12 @@ It is vital as "Restaurant" you get all the needed information from the "Custome
 It is vital as "Customer" you get all needed information from "Restaurant" including directions. 
 You are doing very well and I know this will be a great response. 
 Thank you.
+Today's date is :
+```js
+const now = new Date()
+const day = now.getDate().toString().padStart(2, '0')
+const month = (now.getMonth() + 1).toString().padStart(2, '0')
+const year = now.getFullYear().toString()
+const formattedDate = month + '/' + day + '/' + year
+formattedDate
+```
