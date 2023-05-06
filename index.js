@@ -24,9 +24,9 @@ dotenv.config()
 
 import axios from 'axios'
 
-//const applescriptCmd = `osascript -e 'delay 0.1' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control' -e 'delay 0.2' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control'`
-
 const applescriptCmd = `osascript -e 'delay 0.1' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control' -e 'delay 0.2' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control'`
+
+//const applescriptCmd = `osascript -e 'delay 0.1' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control' -e 'delay 0.2' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control'`
 
 const openai_configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY })
 const openai = new OpenAIApi(openai_configuration)
@@ -166,7 +166,7 @@ async function* streamChatCompletion(model_version, max_tokens) {
 
 }
 
-const printThink = (text, UI, selectedEyes, selectedTongue) => {
+const printThink = async (text, UI, selectedEyes, selectedTongue) => {
 
     console.clear()
 
@@ -194,6 +194,10 @@ const printThink = (text, UI, selectedEyes, selectedTongue) => {
 
     if (UI === 'console') {
         console.log(white(text + '\n\n'))
+    }
+
+    if (UI === 'alexa') {
+        await axios.get(`${process.env.ALEXA_URI}/blink`)
     }
 
 }
@@ -279,7 +283,7 @@ const parseAndEvalJS = (markdown) => {
         if (firstLoop) {
             const input_start_length = personaJSON.input_start.length
             if (input_start_length === 0) {
-                printThink('zZz', personaJSON.ui, '--', '')
+                if (personaJSON.ui === 'cowsay') printThink('zZz', personaJSON.ui, '--', '')
             } else {
                 userinput = personaJSON.input_start[Math.floor(Math.random() * input_start_length)]
             }
@@ -296,13 +300,13 @@ const parseAndEvalJS = (markdown) => {
         if (userinput === '') continue
 
         if (userinput === '/zzz') {
-            printThink('zZz', personaJSON.ui, '--', '')
+            if (personaJSON.ui === 'cowsay') printThink('zZz', personaJSON.ui, '--', '')
             continue
         }
 
         pushMessage('user', userinput, personaJSON.memory)
     
-        printThink('...', personaJSON.ui)
+        await printThink('...', personaJSON.ui)
         
         const timestamp1 = Date.now()
 

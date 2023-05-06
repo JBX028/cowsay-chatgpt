@@ -6,7 +6,7 @@
     "show_timediff": false,
     "stream": true,
     "tts": false,
-    "stt": false,
+    "stt": true,
     "ui": "cowsay",
     "memory": 10,
     "input_start": [],
