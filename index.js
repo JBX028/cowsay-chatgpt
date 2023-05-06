@@ -198,7 +198,7 @@ const printThink = (text, UI, selectedEyes, selectedTongue) => {
 
 }
 
-const printSay = (text, UI, selectedEyes, selectedTongue) => {
+const printSay = async (text, UI, selectedEyes, selectedTongue) => {
 
     console.clear()
 
@@ -225,7 +225,7 @@ const printSay = (text, UI, selectedEyes, selectedTongue) => {
     }
 
     if (UI === 'alexa') {
-        axios.get(`${process.env.ALEXA_URI}/hometts/${text}`)
+        await axios.get(`${process.env.ALEXA_URI}/hometts/${text}`)
     }
 
 }
@@ -327,7 +327,7 @@ const parseAndEvalJS = (markdown) => {
         const timestamp2 = Date.now()
         const timeDiff = (timestamp2 - timestamp1) / 1000
 
-        printSay(output + ((personaJSON.show_timediff == true) ? ' ' + timeDiff : ''), personaJSON.ui, 'OO')
+        await printSay(output + ((personaJSON.show_timediff == true) ? ' ' + timeDiff : ''), personaJSON.ui, 'OO')
         consoleStream(output)
 
         if (personaJSON.tts) {
