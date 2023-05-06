@@ -1,20 +1,33 @@
-const cowsay = require('cowsay')
-const prompt = require('prompt-sync')()
-const fs = require('fs')
-const path = require('path')
-const wrapText = require('wrap-text')
-const { Configuration, OpenAIApi } = require('openai')
-const { exec } = require('child_process')
-const { color, log, white, green } = require('console-log-colors')
-const say = require('say')
-require('dotenv').config()
+import cowsay from 'cowsay'
+import psp from 'prompt-sync-plus'
+const prompt = psp()
+
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+import wrapText from 'wrap-text'
+import { Configuration, OpenAIApi } from 'openai' 
+
+import { exec } from 'child_process'
+
+import { color, log, white, green } from 'console-log-colors'
+
+import say from 'say'
+
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 //const applescriptCmd = `osascript -e 'delay 0.1' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control' -e 'delay 0.2' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control'`
 
 const applescriptCmd = `osascript -e 'delay 0.1' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control' -e 'delay 0.2' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control'`
 
 const openai_configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY })
-openai = new OpenAIApi(openai_configuration)
+const openai = new OpenAIApi(openai_configuration)
 
 let messages = []
 
