@@ -7,8 +7,8 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 import wrapText from 'wrap-text'
 import { Configuration, OpenAIApi } from 'openai' 
@@ -21,6 +21,8 @@ import say from 'say'
 
 import * as dotenv from 'dotenv'
 dotenv.config()
+
+import axios from 'axios'
 
 //const applescriptCmd = `osascript -e 'delay 0.1' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control' -e 'delay 0.2' -e 'tell application "System Events" to key down control' -e 'delay 0.2' -e 'tell application "System Events" to key up control'`
 
@@ -192,7 +194,7 @@ const printThink = (text, UI, selectedEyes, selectedTongue) => {
 
     if (UI === 'console') {
         console.log(white(text + '\n\n'))
-    }    
+    }
 
 }
 
@@ -220,6 +222,10 @@ const printSay = (text, UI, selectedEyes, selectedTongue) => {
 
     if (UI === 'console') {
         console.log(green(text + '\n\n'))
+    }
+
+    if (UI === 'alexa') {
+        axios.get(`${process.env.ALEXA_URI}/hometts/${text}`)
     }
 
 }

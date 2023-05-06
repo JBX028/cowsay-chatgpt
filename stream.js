@@ -1,5 +1,5 @@
-const { spawn } = require('child_process')
-const { color, log, white, red, green } = require('console-log-colors')
+import { spawn } from 'child_process'
+import { color, log, white, red, green } from 'console-log-colors'
 
 const tail = spawn('tail', ['-f', 'console.txt'])
 

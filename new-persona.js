@@ -1,7 +1,14 @@
-const prompt = require('prompt-sync')()
-const fs = require('fs')
-const path = require('path')
-const { color, log, green } = require('console-log-colors')
+import psp from 'prompt-sync-plus'
+const prompt = psp()
+
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+import { color, log, green } from 'console-log-colors'
 
 const param = {
     "save_conversation": true,
