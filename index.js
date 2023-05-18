@@ -290,7 +290,7 @@ const parseAndEvalJS = (markdown) => {
         } else {
             userinput = prompt(`Message ("${persona}"): `)
             if (userinput === '') {
-                printSay('???', personaJSON.ui, 'Oo')
+                if (personaJSON.ui === 'cowsay') printSay('???', personaJSON.ui, 'Oo')
                 continue
             }
         }
