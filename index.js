@@ -72,8 +72,13 @@ const getMostRecentConversation = (persona) => {
 }
 
 const pushMessage = (role, content, memory) => {
-    if (messages.length >= memory) messages.splice(1, 1)
-    messages.push({ role: role, content: content })
+    if (role === 'system' && messages.length > 0) {
+        messages[0].role = role
+        messages[0].content = content
+    } else {
+        if (messages.length >= memory) messages.splice(1, 1)
+        messages.push({ role: role, content: content })
+    }
 }
 
 const getInstructPromptFromMessages = () => {
@@ -337,13 +342,15 @@ const parseAndEvalJS = (markdown) => {
         if (personaJSON.tts) {
             //exec(`say "${output}"`)
             say.speak(output, 'Amélie', 1, (err) => {
-                if (personaJSON.stt) exec(applescriptCmd)
+                if (personaJSON.stt && !personaJSON.answer_end.includes(userinput.toLowerCase())) exec(applescriptCmd)
             })
         } else {
-            if (personaJSON.stt) exec(applescriptCmd)
+            if (personaJSON.stt && !personaJSON.answer_end.includes(userinput.toLowerCase())) exec(applescriptCmd)
         }
 
         personaJSON = JSON.parse(fs.readFileSync(filePathJSON, 'utf-8')) // live reloading
+        personaContent = parseAndEvalJS(personaContent) // live reloading
+        pushMessage('system', personaContent, personaJSON.memory) // live reloading
         
     }
 

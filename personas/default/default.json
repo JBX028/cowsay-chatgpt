@@ -10,5 +10,5 @@
     "ui": "cowsay",
     "memory": 10,
     "input_start": [],
-    "answer_end": ["au revoir", "bye"]
+    "answer_end": ["au revoir", "bye", "aurevoir", "tchao"]
 }
